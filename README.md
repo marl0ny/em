@@ -1,5 +1,5 @@
 # Electrodynamics Simulations (WIP)
-Currently only a free space finite-difference time-domain (FDTD) simulation for 2D is included.
+Currently only a free space finite-difference time-domain (FDTD) simulation for 2D with periodic boundary conditions is included.
 
 ## References
 - Taflove A., Hagness S. (2000). Introduction to Maxwell's Equations and the Yee Algorithm. 

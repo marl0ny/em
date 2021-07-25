@@ -1,6 +1,6 @@
 #ifndef _SHADERS_H_
 #define _SHADERS_H_
-const char *view_shader_source = R"(#version 330 core
+const char *view_shader_source = R"(
 
 precision highp float;
 varying vec2 st;
@@ -11,7 +11,7 @@ void main() {
     vec4 col = texture2D(tex, st);
     gl_FragColor = vec4(-col.b + col.r, col.g, col.b - col.r, 1.0);
 })";
-const char *quad_shader_source = R"(#version 330 core
+const char *quad_shader_source = R"(
 
 precision highp float;
 attribute vec3 position;
@@ -22,7 +22,7 @@ void main () {
     st = vec2(0.5, 0.5) + position.xy/2.0;
 }
 )";
-const char *e_field_shader_source = R"(#version 330 core
+const char *e_field_shader_source = R"(
 
 precision highp float;
 varying vec2 st;
@@ -38,8 +38,6 @@ uniform sampler2D texHField;
 uniform sampler2D texJ;
 
 void main() {
-    // +0.5*dy/h
-    // +0.5*dx/w
     vec3 dHdx = texture2D(texHField, vec2(st.x+dx/w, st.y+0.5*dy/h)).xyz/dx
                  - texture2D(texHField, vec2(st.x, st.y+0.5*dy/h)).xyz/dx;
     vec3 dHdy = texture2D(texHField, vec2(st.x+0.5*dx/w, st.y+dy/h)).xyz/dy
@@ -52,7 +50,7 @@ void main() {
                      + (1.0 - 0.5*dt*sigma/epsilon)*prevE);
     gl_FragColor = vec4(nextE, 1.0);
 })";
-const char *simple_out_shader_source = R"(#version 330 core
+const char *simple_out_shader_source = R"(
 
 precision highp float;
 varying vec2 st;
@@ -62,7 +60,7 @@ void main() {
     highp vec4 col = texture2D(tex, st);
     gl_FragColor = col;
 })";
-const char *wavepacket_shader_source = R"(#version 330 core
+const char *wavepacket_shader_source = R"(
 
 precision highp float;
 varying vec2 st;
@@ -99,7 +97,7 @@ void main() {
                         1.0);
 }
 )";
-const char *h_field_shader_source = R"(#version 330 core
+const char *h_field_shader_source = R"(
 
 precision highp float;
 varying vec2 st;
@@ -115,8 +113,6 @@ uniform sampler2D texHField;
 uniform sampler2D texSource;
 
 void main() {
-    // -0.5*dy/h
-    // -0.5*dx/w
     vec3 dEdx = texture2D(texEField, vec2(st.x, st.y-0.5*dy/h)).xyz/dx
                 - texture2D(texEField, vec2(st.x-dx/w, st.y-0.5*dy/h)).xyz/dx;
     vec3 dEdy = texture2D(texEField, vec2(st.x-0.5*dx/w, st.y)).xyz/dy
