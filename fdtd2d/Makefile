@@ -35,7 +35,7 @@ ${HEADER}: ${SHADERS}
 ${TARGET2}: ${SOURCES}
 	python3 -m make_shaders_h --webgl
 	EMCC_DEBUG=1
-	emcc -o $@ $^ -std=c++11 -O0 -s WASM=1 -s USE_GLFW=3 -s FULL_ES2=1
+	emcc -o $@ $^ -std=c++11 -O3 -s WASM=1 -s USE_GLFW=3 -s FULL_ES2=1
 
 clean:
 	rm -f *.o *~ *.gch ${TARGET} *.wasm ${TARGET2}
